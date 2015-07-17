@@ -33,9 +33,11 @@ handler = logging.StreamHandler()
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
-
-def get_credentials():
-    """Gets valid user credentials from storage.
+def get_credentials(): 
+    """Straight out of Google's quickstart example:
+        https://developers.google.com/gmail/api/quickstart/python
+    
+    Gets valid user credentials from storage.
 
     If nothing has been stored, or if the stored credentials are invalid,
     the OAuth2 flow is completed to obtain the new credentials.
@@ -59,7 +61,6 @@ def get_credentials():
             credentials = tools.run_flow(flow, store, flags)
         else: # Needed only for compatability with Python 2.6
             credentials = tools.run(flow, store)
-        #print 'Storing credentials to ' + credential_path
     return credentials
 
 def main():
@@ -105,19 +106,21 @@ def main():
             if header["name"] == "Subject":
                 subject = header["value"]
 
-
+        # Create a todoist item.
         item = api.items.add(u'https://mail.google.com/mail/u/0/#inbox/{0} (Review Email: {1})'.format(m["id"], subject), config["TODOIST_PROJECT_ID_GMAIL"], date_string="today")
         logger.info("Processing {0}: {1}.".format(m["id"], subject.encode("utf-8")))
         r = api.commit()
 
+        # Skip this item on error.
         if "error_code" in r:
             logger.info ("Task for email {0} was not created. Error: {1}:{2}".format(m["id"], r["error_code"], r["error_string"]))
             continue
 
+        # A note that the task was auto-generated.
         note = api.notes.add(item["id"], u'Automatically Generated Task by Todoist Task Creator Script')
         r = api.commit()
 
-        # Mark message as read.
+        # Mark message as read and unstar them.
         thread = service.users().threads().modify(userId=USER_ID, id=m["threadId"], body={'removeLabelIds': ['UNREAD', 'STARRED'], 'addLabelIds': []}).execute()
 
 if __name__ == '__main__':
