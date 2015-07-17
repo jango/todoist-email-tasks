@@ -17,8 +17,6 @@ CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Gmail API Quickstart'
 USER_ID = 'me'
 
-
-
 # Set up a specific logger with our desired output level
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -94,10 +92,10 @@ def main():
 
     if len(messages) == 0:
         logger.info("No starred message(s).")
+    else:
+        logger.info("{0} starred messages found.".format(len(messages)))
     
     for m in messages:
-        logger.info("{0} starred messages found.".format(len(messages)))
-
         message = service.users().messages().get(userId=USER_ID, id=m["id"]).execute()
         
         subject = "No Subject"
