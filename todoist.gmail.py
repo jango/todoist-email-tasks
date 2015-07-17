@@ -11,7 +11,8 @@ import oauth2client
 from oauth2client import client
 from oauth2client import tools
 
-LOG_FILENAME = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'todoist.gmail.log')
+MY_LOCATION = os.path.dirname(os.path.realpath(__file__))
+LOG_FILENAME = os.path.join(MY_LOCATION, 'todoist.gmail.log')
 SCOPES = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/gmail.modify']
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Gmail API Quickstart'
@@ -65,8 +66,9 @@ def get_credentials():
 
 def main():
 
+    # Get config.
     config = {}
-    execfile("todoist.conf", config) 
+    execfile(os.path.join(MY_LOCATION, "todoist.conf"), config) 
 
     # Initialize Google credentials.
     credentials = get_credentials()
