@@ -1,3 +1,4 @@
+import runpy
 import todoist
 import logging
 import logging.handlers
@@ -67,8 +68,7 @@ def get_credentials():
 def main():
 
     # Get config.
-    config = {}
-    execfile(os.path.join(MY_LOCATION, "todoist.conf"), config) 
+    config = runpy.run_path(os.path.join(MY_LOCATION, "todoist.conf")) 
 
     # Initialize Google credentials.
     credentials = get_credentials()
