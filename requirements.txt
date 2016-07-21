@@ -1,2 +1,2 @@
-todoist-python==0.2.17
+todoist-python==7.0.8
 google-api-python-client==1.4.1

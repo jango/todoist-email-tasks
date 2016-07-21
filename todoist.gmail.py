@@ -78,7 +78,7 @@ def main():
 
     # Initialize Todist API.
     api = todoist.TodoistAPI(config["TODOIST_API_TOKEN"])
-    api.sync(resource_types=['all'])
+    api.sync()
     service = discovery.build('gmail', 'v1', http=http)
 
     # Get all gmail messages that are starred:

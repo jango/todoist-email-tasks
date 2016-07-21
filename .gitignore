@@ -1,5 +1,5 @@
 # Project-specific.
-*.log
+*.log.*
 todoist.conf
 client_secret.json
 

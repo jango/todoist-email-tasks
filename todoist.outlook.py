@@ -51,7 +51,7 @@ def main():
 
     # Init Todoist API.
     api = todoist.TodoistAPI(config["TODOIST_API_TOKEN"])
-    api.sync(resource_types=['all'])
+    api.sync()
 
     # For some background on Outlook Interop model, see:
     # https://msdn.microsoft.com/en-us/library/office/ff861868%28v=office.15%29.aspx
