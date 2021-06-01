@@ -14,4 +14,4 @@ rsa==3.4.2
 six==1.11.0
 todoist-python==7.0.18
 uritemplate==3.0.0
-urllib3==1.22
+urllib3==1.26.5
